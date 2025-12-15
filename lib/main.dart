@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 
+
+// ===== IMPORT CÁC BÀI TẬP (VUI LÒNG KIỂM TRA TÊN FILE) =====
+// Cần đảm bảo các file này tồn tại trong thư mục lib
 import 'baitap1_form_dang_ky.dart';
 import 'baitap2_bmi.dart';
 import 'baitap3_timer.dart';
@@ -14,6 +17,7 @@ import 'bai10_Sahara.dart';
 import 'bai11_counter.dart';
 import 'bai12_doimaunen.dart';
 
+// ===== HẰNG SỐ CHUNG CHO THIẾT KẾ =====
 const Color kHeaderStartColor = Color(0xFF2E6FF9);
 const Color kHeaderEndColor = Color(0xFF00B0FF);
 const Color kPrimaryBlue = kHeaderStartColor; 
@@ -30,12 +34,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'BÀI KIỂM TRA FLUTTER – VĂN LỢI',
+      title: 'BÀI KIỂM TRA FLUTTER – 22T1020655 - ĐÀO VĂN LỢI',
       home: HomePage(),
     );
   }
 }
 
+// ================= HOME - STATEFUL (Mở Drawer Mặc Định & KHÔI PHỤC MENU) =================
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -49,6 +54,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    // Mở Drawer tự động ngay khi màn hình load xong lần đầu
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scaffoldKey.currentState?.openDrawer();
     });
@@ -59,7 +65,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: const Text('BÀI KIỂM TRA FLUTTER – ĐÀO VĂN LỢI'),
+        // Khôi phục dấu 3 gạch
+        title: const Text('BÀI KIỂM TRA FLUTTER – 22T1020655 - ĐÀO VĂN LỢI'),
         elevation: 0,
       ),
       drawer: Drawer(
@@ -114,6 +121,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      // BODY ĐÃ NÂNG CẤP
       body: const Center(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(24.0),
@@ -121,20 +129,26 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _WelcomeBanner(), 
+              _WelcomeBanner(), // Banner Giới thiệu
               
               SizedBox(height: 30),
 
-              _StatCardOnly(), 
+              _StatCardOnly(), // Thống kê hoàn thành
 
               SizedBox(height: 30),
 
+              // Hướng dẫn sử dụng Drawer (Cập nhật hướng dẫn)
               Text(
-                '⬅️ Chọn bài tập từ Dấu 3 gạch bên trái',
+                '⬅️ Chọn bài tập từ Danh sách bên trái',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, color: Colors.blueGrey, fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 5),             
+              SizedBox(height: 5),
+              Text(
+                '(Hoặc bấm dấu 3 gạch hoặc vuốt từ mép trái màn hình để mở lại)',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, color: Colors.grey),
+              ),
             ],
           ),
         ),
@@ -142,6 +156,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // LOGIC FIX LỖI BACK VÀ TỰ ĐỘNG MỞ LẠI DRAWER
   ListTile _item(
     BuildContext context,
     String title,
@@ -160,20 +175,23 @@ class _HomePageState extends State<HomePage> {
       ),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black26),
       onTap: () async {
+        // 1. Đóng Drawer
         Navigator.pop(context);
         
+        // 2. Chuyển sang màn hình mới và ĐỢI người dùng bấm Back
         await Navigator.push( 
           context,
           MaterialPageRoute(builder: (_) => page),
         );
         
+        // 3. SAU KHI màn hình con đóng, MỞ LẠI Drawer
         _scaffoldKey.currentState?.openDrawer();
       },
     );
   }
 }
 
-
+// ========================= WIDGET: WELCOME BANNER =========================
 class _WelcomeBanner extends StatelessWidget {
   const _WelcomeBanner();
 
@@ -218,6 +236,7 @@ class _WelcomeBanner extends StatelessWidget {
   }
 }
 
+// ========================= WIDGET: CHỈ HIỂN THỊ THỐNG KÊ HOÀN THÀNH =========================
 class _StatCardOnly extends StatelessWidget {
   const _StatCardOnly();
 
@@ -238,6 +257,7 @@ class _StatCardOnly extends StatelessWidget {
   }
 }
 
+// WIDGET CON CHO THỐNG KÊ
 class _StatCard extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -291,13 +311,14 @@ class _StatCard extends StatelessWidget {
   }
 }
 
+// ================= WIDGET HEADER (CÓ AVATAR MỚI) =================
 class _CustomDrawerHeader extends StatelessWidget {
   const _CustomDrawerHeader();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 40, bottom: 20, left: 16),
+      padding: const EdgeInsets.only(top: 40, bottom: 20, left: 16, right: 16), 
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [kHeaderStartColor, kHeaderEndColor],
@@ -306,19 +327,20 @@ class _CustomDrawerHeader extends StatelessWidget {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center, // Căn giữa các mục
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 64,
-            height: 64,
+            width: 90, // Tăng kích thước
+            height: 90, // Tăng kích thước
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 2),
+              border: Border.all(color: Colors.white, width: 3), // Tăng độ dày viền
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
+                  blurRadius: 6, // Tăng hiệu ứng bóng đổ
+                  offset: Offset(0, 3),
                 ),
               ],
             ),
@@ -327,21 +349,23 @@ class _CustomDrawerHeader extends StatelessWidget {
                 'assets/images/VanLoi.png',
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return const Icon(Icons.person, size: 40, color: kHeaderStartColor);
+                  return const Icon(Icons.person, size: 60, color: kHeaderStartColor); 
                 },
               ),
             ),
           ),
           
-          const SizedBox(height: 10),
+          const SizedBox(height: 15), // Tăng khoảng cách
           const Text(
             'ĐÀO VĂN LỢI',
-            style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center, // Căn giữa Text
+            style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold), // Tăng cỡ chữ
           ),
           const SizedBox(height: 4),
           const Text(
             'Danh sách bài tập',
-            style: TextStyle(color: Colors.white70, fontSize: 14),
+            textAlign: TextAlign.center, // Căn giữa Text
+            style: TextStyle(color: Colors.white70, fontSize: 16),
           ),
         ],
       ),
@@ -349,6 +373,7 @@ class _CustomDrawerHeader extends StatelessWidget {
   }
 }
 
+// ================= WIDGET FOOTER =================
 class _DrawerFooter extends StatelessWidget {
   const _DrawerFooter();
 
@@ -370,6 +395,7 @@ class _DrawerFooter extends StatelessWidget {
   }
 }
 
+// ================= WRAPPER (Để giữ AppBar cho các bài tập con) =================
 Widget wrap(Widget child, String title) {
   return Scaffold(
     appBar: AppBar(
