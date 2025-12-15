@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'BÀI KIỂM TRA FLUTTER – VĂN LỢIzzz',
+      title: 'BÀI KIỂM TRA FLUTTER – VĂN LỢI',
       home: HomePage(),
     );
   }
