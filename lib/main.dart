@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-
-// ===== IMPORT CÁC BÀI TẬP (VUI LÒNG KIỂM TRA TÊN FILE) =====
-// Cần đảm bảo các file này tồn tại trong thư mục lib
 import 'baitap1_form_dang_ky.dart';
 import 'baitap2_bmi.dart';
 import 'baitap3_timer.dart';
@@ -17,7 +14,6 @@ import 'bai10_Sahara.dart';
 import 'bai11_counter.dart';
 import 'bai12_doimaunen.dart';
 
-// ===== HẰNG SỐ CHUNG CHO THIẾT KẾ =====
 const Color kHeaderStartColor = Color(0xFF2E6FF9);
 const Color kHeaderEndColor = Color(0xFF00B0FF);
 const Color kPrimaryBlue = kHeaderStartColor; 
@@ -34,13 +30,12 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'BÀI KIỂM TRA FLUTTER – 22T1020655 - ĐÀO VĂN LỢI',
+      title: 'BÀI KIỂM TRA FLUTTER – ĐÀO VĂN LỢI',
       home: HomePage(),
     );
   }
 }
 
-// ================= HOME - STATEFUL (Mở Drawer Mặc Định & KHÔI PHỤC MENU) =================
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -54,7 +49,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // Mở Drawer tự động ngay khi màn hình load xong lần đầu
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scaffoldKey.currentState?.openDrawer();
     });
@@ -66,7 +60,7 @@ class _HomePageState extends State<HomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         // Khôi phục dấu 3 gạch
-        title: const Text('BÀI KIỂM TRA FLUTTER – 22T1020655 - ĐÀO VĂN LỢI'),
+        title: const Text('BÀI KIỂM TRA FLUTTER – ĐÀO VĂN LỢI'),
         elevation: 0,
       ),
       drawer: Drawer(
@@ -129,26 +123,22 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _WelcomeBanner(), // Banner Giới thiệu
+              _WelcomeBanner(), 
               
               SizedBox(height: 30),
 
-              _StatCardOnly(), // Thống kê hoàn thành
+              _StatCardOnly(), 
 
               SizedBox(height: 30),
 
-              // Hướng dẫn sử dụng Drawer (Cập nhật hướng dẫn)
               Text(
                 '⬅️ Chọn bài tập từ Danh sách bên trái',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, color: Colors.blueGrey, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 5),
-              Text(
-                '(Hoặc bấm dấu 3 gạch hoặc vuốt từ mép trái màn hình để mở lại)',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.grey),
-              ),
+    
+              
             ],
           ),
         ),
@@ -156,7 +146,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // LOGIC FIX LỖI BACK VÀ TỰ ĐỘNG MỞ LẠI DRAWER
   ListTile _item(
     BuildContext context,
     String title,
@@ -178,20 +167,17 @@ class _HomePageState extends State<HomePage> {
         // 1. Đóng Drawer
         Navigator.pop(context);
         
-        // 2. Chuyển sang màn hình mới và ĐỢI người dùng bấm Back
         await Navigator.push( 
           context,
           MaterialPageRoute(builder: (_) => page),
         );
         
-        // 3. SAU KHI màn hình con đóng, MỞ LẠI Drawer
         _scaffoldKey.currentState?.openDrawer();
       },
     );
   }
 }
 
-// ========================= WIDGET: WELCOME BANNER =========================
 class _WelcomeBanner extends StatelessWidget {
   const _WelcomeBanner();
 
@@ -223,7 +209,7 @@ class _WelcomeBanner extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'Dự án tổng hợp 12 bài thực hành giao diện và logic ứng dụng di động.',
+            'Dự án tổng hợp 12 bài thực hành',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 14,
@@ -236,7 +222,6 @@ class _WelcomeBanner extends StatelessWidget {
   }
 }
 
-// ========================= WIDGET: CHỈ HIỂN THỊ THỐNG KÊ HOÀN THÀNH =========================
 class _StatCardOnly extends StatelessWidget {
   const _StatCardOnly();
 
@@ -257,7 +242,6 @@ class _StatCardOnly extends StatelessWidget {
   }
 }
 
-// WIDGET CON CHO THỐNG KÊ
 class _StatCard extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -311,7 +295,6 @@ class _StatCard extends StatelessWidget {
   }
 }
 
-// ================= WIDGET HEADER (CÓ AVATAR MỚI) =================
 class _CustomDrawerHeader extends StatelessWidget {
   const _CustomDrawerHeader();
 
@@ -327,19 +310,19 @@ class _CustomDrawerHeader extends StatelessWidget {
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center, // Căn giữa các mục
+        crossAxisAlignment: CrossAxisAlignment.center, 
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: 90, // Tăng kích thước
-            height: 90, // Tăng kích thước
+            width: 90, 
+            height: 90, 
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.white, width: 3), // Tăng độ dày viền
+              border: Border.all(color: Colors.white, width: 3), 
               boxShadow: const [
                 BoxShadow(
                   color: Colors.black26,
-                  blurRadius: 6, // Tăng hiệu ứng bóng đổ
+                  blurRadius: 6, 
                   offset: Offset(0, 3),
                 ),
               ],
@@ -355,16 +338,16 @@ class _CustomDrawerHeader extends StatelessWidget {
             ),
           ),
           
-          const SizedBox(height: 15), // Tăng khoảng cách
+          const SizedBox(height: 15),
           const Text(
             'ĐÀO VĂN LỢI',
-            textAlign: TextAlign.center, // Căn giữa Text
+            textAlign: TextAlign.center, 
             style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold), // Tăng cỡ chữ
           ),
           const SizedBox(height: 4),
           const Text(
             'Danh sách bài tập',
-            textAlign: TextAlign.center, // Căn giữa Text
+            textAlign: TextAlign.center, 
             style: TextStyle(color: Colors.white70, fontSize: 16),
           ),
         ],
@@ -373,7 +356,6 @@ class _CustomDrawerHeader extends StatelessWidget {
   }
 }
 
-// ================= WIDGET FOOTER =================
 class _DrawerFooter extends StatelessWidget {
   const _DrawerFooter();
 
@@ -395,7 +377,6 @@ class _DrawerFooter extends StatelessWidget {
   }
 }
 
-// ================= WRAPPER (Để giữ AppBar cho các bài tập con) =================
 Widget wrap(Widget child, String title) {
   return Scaffold(
     appBar: AppBar(
