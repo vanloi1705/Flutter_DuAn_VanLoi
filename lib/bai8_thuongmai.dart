@@ -183,7 +183,6 @@ class _ShopeeHomeScreenState extends State<ShopeeHomeScreen> {
                     backgroundImage: NetworkImage("https://i.pravatar.cc/150?img=11"), // Avatar mẫu
                   ),
                   const SizedBox(width: 8),
-                  // Chỉ hiện tên nếu màn hình đủ rộng (Tablet/Web)
                   if (screenWidth > 600)
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +224,7 @@ class _ShopeeHomeScreenState extends State<ShopeeHomeScreen> {
                                 child: Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                     color: Colors.black54,
-                                    child: const Text("Siêu Sale Hàng Hiệu - Chào mừng Văn Lợi", style: TextStyle(color: Colors.white))
+                                    child: const Text("Siêu Sale Hàng Hiệu - Chào mừng Văn Lợi đã trở lại!", style: TextStyle(color: Colors.white))
                                 )
                             )
                         ]
@@ -233,7 +232,6 @@ class _ShopeeHomeScreenState extends State<ShopeeHomeScreen> {
                   ),
                 ),
 
-                // Tiêu đề danh sách: GỢI Ý HÔM NAY
                 SliverToBoxAdapter(
                   child: Container(
                     padding: const EdgeInsets.all(15),
@@ -248,15 +246,15 @@ class _ShopeeHomeScreenState extends State<ShopeeHomeScreen> {
                   ),
                 ),
                 
-                // Khoảng cách nhỏ
+                
                 const SliverToBoxAdapter(child: SizedBox(height: 4)),
 
-                // Lưới sản phẩm
+
                 SliverPadding(
                   padding: const EdgeInsets.all(8.0),
                   sliver: SliverGrid(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount, // Số cột linh hoạt
+                      crossAxisCount: crossAxisCount, 
                       childAspectRatio: childAspectRatio,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 8,

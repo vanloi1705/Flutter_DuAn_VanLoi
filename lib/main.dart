@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 30),
 
               Text(
-                '⬅️ Chọn bài tập từ Danh sách bên trái',
+                '⬅️ Chọn vào dấu 3 gạch từ góc bên trái để xem bài tập',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18, color: Colors.blueGrey, fontWeight: FontWeight.w600),
               ),
